@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_margin="10dp"
+    >
+
+        <TextView
+            android:id="@+id/billTotalWithTax"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:text="@string/bill_total_with_tax"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="3dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="3dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/billTotal"
+            android:layout_width="175dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="#DDBADFBB"
+            android:paddingLeft="5dp"
+            android:paddingTop="3dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="3dp"
+            android:includeFontPadding="true"
+            android:inputType="number|numberDecimal"
+            android:textAlignment="textEnd"
+            app:layout_constraintHorizontal_bias="0.555"
+            android:hint="$0.00"
+            app:layout_constraintStart_toEndOf="@id/billTotalWithTax"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tipPercent"
+        android:layout_width="175dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:includeFontPadding="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:text="@string/tip_percent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/billTotalWithTax" />
+
+    <RadioGroup
+        android:id="@+id/tipPercentRg"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:onClick="calculateTipAmt"
+        app:layout_constraintTop_toBottomOf="@+id/tipPercent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_12"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:buttonTint="#673AB7"
+            android:layout_weight="1"
+            android:checked="false"
+            android:onClick="calculateTipAmt"/>
+
+        <RadioButton
+            android:id="@+id/rb_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_15"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:buttonTint="#673AB7"
+            android:layout_weight="1"
+            android:checked="false"
+            android:onClick="calculateTipAmt"/>
+
+        <RadioButton
+            android:id="@+id/rb_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_18"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:buttonTint="#673AB7"
+            android:layout_weight="1"
+            android:checked="false"
+            android:onClick="calculateTipAmt"/>
+
+        <RadioButton
+            android:id="@+id/rb_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_20"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:buttonTint="#673AB7"
+            android:layout_weight="1"
+            android:checked="false"
+            android:onClick="calculateTipAmt"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tipAmount"
+        android:layout_width="175dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/tip_amount"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:includeFontPadding="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipPercentRg"/>
+
+    <TextView
+        android:id="@+id/tipAmountTextView"
+        android:layout_width="170dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:includeFontPadding="true"
+        android:textAlignment="viewEnd"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:background="#61B8B3B3"
+        android:hint="$0.00"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tipAmount"
+        app:layout_constraintTop_toBottomOf="@+id/tipPercentRg"
+        />
+
+
+    <TextView
+        android:id="@+id/totalWithTipTxt"
+        android:layout_width="175dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:includeFontPadding="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:hint="$0.00"
+        android:text="@string/total_with_tip"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipAmount"/>
+
+
+    <TextView
+        android:id="@+id/tipWithTotalTextView"
+        android:layout_width="170dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:includeFontPadding="true"
+        android:textAlignment="viewEnd"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:background="#61B8B3B3"
+        android:hint="@string/init_0"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/totalWithTipTxt"
+        app:layout_constraintTop_toBottomOf="@+id/tipAmount" />
+
+    <TextView
+        android:id="@+id/numberofPeople"
+        android:layout_width="182dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-light"
+        android:includeFontPadding="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:text="@string/number_of_people"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalWithTipTxt"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+    <EditText
+        android:id="@+id/numOfPplEditText"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="#DDBADFBB"
+        android:ems="10"
+        android:includeFontPadding="true"
+        android:inputType="number"
+        android:labelFor="@id/numberofPeople"
+        android:onClick="btnGo"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:textAlignment="viewEnd"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/numberofPeople"
+        app:layout_constraintTop_toBottomOf="@+id/tipWithTotalTextView"
+        tools:ignore="TouchTargetSizeCheck,UsingOnClickInXml" />
+
+
+    <Button
+        android:id="@+id/goBtn"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/btn_go"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toEndOf="@+id/numOfPplEditText"
+        app:layout_constraintTop_toBottomOf="@+id/tipWithTotalTextView"
+        tools:ignore="TouchTargetSizeCheck"
+        android:onClick="btnGo"/>
+
+
+    <TextView
+        android:id="@+id/totalPerPerson"
+        android:layout_width="180dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif-light"
+        android:includeFontPadding="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:text="@string/total_per_person"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberofPeople" />
+
+    <TextView
+        android:id="@+id/totalAmtPerPersonTextView"
+        android:layout_width="170dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="#61B8B3B3"
+        android:includeFontPadding="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp"
+        android:textAlignment="viewEnd"
+        android:hint="@string/init_0"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toEndOf="@+id/totalPerPerson"
+        app:layout_constraintTop_toBottomOf="@+id/numOfPplEditText"
+        tools:ignore="TextContrastCheck" />
+
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="127dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="clearAll"
+        android:text="@string/btn_clear"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/totalPerPerson" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/numberofPeople"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalWithTipTxt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
